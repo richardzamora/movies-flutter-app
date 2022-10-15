@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:leal_movies/src/core/theme/theme.dart';
+import 'package:leal_movies/src/login/ui/pages/sign_in_page.dart';
+import 'package:leal_movies/src/core/routes/routes.dart';
 
 final helloWorldProvider = Provider((_) => MyClass());
 
@@ -24,6 +27,9 @@ class MyApp extends HookConsumerWidget {
         ref.watch(helloWorldProvider.select((value) => value.text));
 
     return MaterialApp(
+      routes: routes,
+      initialRoute: SignInPage.pageRoute,
+      theme: appTheme,
       home: Scaffold(
         appBar: AppBar(title: const Text('Example')),
         body: Center(
