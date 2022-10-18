@@ -1,6 +1,9 @@
 # leal_movies
 
-A new Flutter project.
+##Running the App
+An api key from The Movie DB is required to run the app. Then you can run the app by adding the following run arguments or define it on lib\src\core\configs\configs.dart:
+
+--dart-define=TMDB_API_KEY=<YOUR_API_KEY>
 
 ## Getting Started
 

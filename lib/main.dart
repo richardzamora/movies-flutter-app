@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:leal_movies/src/core/configs/configs.dart';
 import 'package:leal_movies/src/core/theme/theme.dart';
 import 'package:leal_movies/src/login/ui/pages/sign_in_page.dart';
 import 'package:leal_movies/src/core/routes/routes.dart';
@@ -25,6 +26,7 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final String value =
         ref.watch(helloWorldProvider.select((value) => value.text));
+    print(Configs.tmdbAPIKey);
 
     return MaterialApp(
       routes: routes,
