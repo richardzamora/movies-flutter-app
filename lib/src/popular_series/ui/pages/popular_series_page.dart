@@ -1,13 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:leal_movies/src/core/routes/routes.dart';
+import 'package:leal_movies/src/popular_series/providers/popular_series_provider.dart';
 
-class HomePage extends HookConsumerWidget {
+class PopularSeriesPage extends HookConsumerWidget {
   static const pageRoute = "/home";
-  const HomePage({super.key});
+  const PopularSeriesPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final tvSeriesAsync = ref.watch(popularSeriesProvider(1));
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.primaryColorDark,
@@ -38,6 +41,34 @@ class HomePage extends HookConsumerWidget {
                     fontSize: 28,
                     fontWeight: FontWeight.w600)),
           ),
+          tvSeriesAsync.when(
+            data: (data) {
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: data.results.length,
+                  itemBuilder: (context, index) {
+                    return Text(
+                      data.results[index].name ?? "name",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    );
+                  },
+                ),
+              );
+            },
+            error: (error, stackTrace) {
+              String message = error.toString();
+              if (error is DioError) {
+                message = error.message;
+              }
+              return Container(
+                color: Colors.red,
+                child: Text(message),
+              );
+            },
+            loading: () {
+              return const Center(child: CircularProgressIndicator());
+            },
+          )
         ],
       ),
     );

@@ -12,8 +12,6 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nameController = useTextEditingController();
-    final passwordController = useTextEditingController();
     final provider = ref.watch(loginProvider);
     final theme = Theme.of(context);
     return Scaffold(
